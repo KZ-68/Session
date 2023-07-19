@@ -46,7 +46,7 @@ class Programme
         return $this->matiere;
     }
 
-    public function setMatieres(?Matiere $matiere): static
+    public function setMatiere(?Matiere $matiere): static
     {
         $this->matiere = $matiere;
 

@@ -71,7 +71,7 @@ class Matiere
     {
         if (!$this->programmes->contains($programme)) {
             $this->programmes->add($programme);
-            $programme->setMatieres($this);
+            $programme->setMatiere($this);
         }
 
         return $this;
@@ -81,8 +81,8 @@ class Matiere
     {
         if ($this->programmes->removeElement($programme)) {
             // set the owning side to null (unless already changed)
-            if ($programme->getMatieres() === $this) {
-                $programme->setMatieres(null);
+            if ($programme->getMatiere() === $this) {
+                $programme->setMatiere(null);
             }
         }
 
