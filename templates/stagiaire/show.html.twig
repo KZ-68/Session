@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Détail d'un stagiaire{% endblock %}
+
+{% block body %}
+    <h1>Fiche stagiaire</h1>
+
+    <h2>{{ stagiaire }}</h2>
+
+    <p>
+       Sexe : {{ stagiaire.genre}} <br/>
+       Date de Naissance {{ stagiaire.dateNaissance | date("d.m.Y") }} <br/>
+       Ville : {{ stagiaire.ville }} <br/>
+       Courriel : {{ stagiaire.email }} <br/>
+       Téléphone :  {% if stagiaire.telephone | length > 0 %} <br/> 
+                    {{ stagiaire.telephone }} <br/>
+                    {% else %}
+                    Aucun numéro de téléphone renseigné
+                    {% endif %}
+        
+       
+    </p>
+
+    <h3>Session prévues</h3>
+    {% if stagiaire.sessions | length > 0 %}
+        {% for session in stagiaire.sessions %}
+        <tr><td><a href="">{{session.formation.intituleFormation }}</a> {{ session.dureeDate }}</td></tr> <br/>
+        {% endfor %}
+    {% else %}
+        <p>Aucune session de prévue pour le moment.</p>
+    {% endif %}
+
+{% endblock %}
