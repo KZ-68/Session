@@ -3,5 +3,30 @@
 {% block title %}Hello SessionController!{% endblock %}
 
 {% block body %}
+    <h1>Liste des sessions</h1>
+    
+    <table class="table">
+        <thead>
+            <th>Intitulé Session</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Nb Places Théoriques</th>
+            <th>Nb Places Réservées</th>
+            <th>Nb Places Restantes</th>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+        <tr>
+            <td>{{ session.formation.intituleFormation }}</td>
+            <td>{{ session.dateDebut | date("d.m.Y") }}</td>
+            <td>{{ session.dateFin | date("d.m.Y") }}</td>
+            <td>{{ session.nbMax }}</td>
+            <td> {{ session.nbInscrit }}</td>
+            <td> {{session.nbPlacesRestante}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
 
 {% endblock %}
