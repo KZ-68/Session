@@ -157,4 +157,7 @@ class Session
         return $restant;
     }
 
+    public function getDureeDate(): ?string {
+        return "(du ".$this->dateDebut->format('d-m-Y')." au ".$this->dateFin->format('d-m-Y').")";
+    }
 }
