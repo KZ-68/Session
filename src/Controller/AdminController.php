@@ -7,6 +7,7 @@ use App\Entity\Categorie;
 use App\Entity\Programme;
 use App\Form\MatiereType;
 use App\Form\CategorieType;
+use App\Form\ProgrammeType;
 use App\Repository\MatiereRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ProgrammeRepository;
@@ -112,5 +113,40 @@ class AdminController extends AbstractController
         return $this->render('admin/programmesList.html.twig', [
             'programmes' => $programmes
         ]);
+    }
+
+    #[Route('admin/programme/new', name: 'new_programme')]
+    #[Route('admin/programme/{id}/edit', name: 'edit_programme')]
+    public function new_edit_programme(Programme $programme = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if (!$programme) {
+            $programme = new Programme();
+        }
+
+        $form = $this->createForm(ProgrammeType::class, $programme);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $programme = $form->getData();
+            $entityManager->persist($programme);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_programme');
+        }
+
+        return $this->render('admin/new_programme.html.twig', [
+            'formAddProgramme' => $form,
+            'edit' => $programme->getId()
+        ]);
+    }
+
+    #[Route('/programme/{id}/delete', name: 'delete_programme')]
+    public function deleteProgramme(Programme $programme, EntityManagerInterface $entityManager) {
+        // Prépare la suppression d'une instance de l'objet 
+        $entityManager->remove($programme);
+        // Exécute la suppression
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_programme');
     }
 }
