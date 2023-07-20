@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Ajouter une matiere{% endblock %}
+
+{% block body %}
+    {% if edit %}
+    <h1>Editer un matiere</h1>
+    {% else %}
+    <h1>Ajouter un matiere</h1>
+    {% endif %}
+
+    {{ form_start(formAddMatiere) }}
+        {{ form_row(formAddMatiere.denomination)}}
+        {{ form_row(formAddMatiere.categorie)}}
+        {{ form_row(formAddMatiere.valider)}}
+    {{ form_end(formAddMatiere) }}
+
+{% endblock %}
