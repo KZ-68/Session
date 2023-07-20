@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'Administration{% endblock %}
+
+{% block body %}
+
+<h1>Page d'Administration</h1>
+
+<div class="container">
+    <div class="column">
+      <div class="col-md">
+        <a href="{{ path('app_matiere') }}">Liste des matieres</a>
+      </div>
+      <div class="col-md">
+        <a href="{{ path('app_categorie') }}">Liste des catégories</a>
+      </div>
+      <div class="col-md">
+        <a href="{{ path('app_programme') }}">Liste des programmes</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
