@@ -19,8 +19,8 @@
         {% for session in sessions %}
         <tr>
             <td><a href="{{ path('showFormation_session', {'id': session.formation.id}) }}">{{ session.formation.intituleFormation }}</a></td>
-            <td>{{ session.dateDebut | date("d.m.Y") }}</td>
-            <td>{{ session.dateFin | date("d.m.Y") }}</td>
+            <td>{{ session.dateDebut | date("d/m/Y") }}</td>
+            <td>{{ session.dateFin | date("d/m/Y") }}</td>
             <td>{{ session.nbMax }}</td>
             <td>{{ session.nbInscrit }}</td>
             <td>{{ session.nbPlacesRestante }}</td>
