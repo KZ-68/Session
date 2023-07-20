@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Ajouter un stagiaire{% endblock %}
+
+{% block body %}
+    {% if edit %}
+    <h1>Editer un stagiaire</h1>
+    {% else %}
+    <h1>Ajouter un stagiaire</h1>
+    {% endif %}
+
+    {{ form_start(formAddStagiaire) }}
+        <div class="row">
+            <div class="col-sm">
+                {{ form_row(formAddStagiaire.prenom)}}
+            </div>
+            <div class="col-sm">
+                {{ form_row(formAddStagiaire.nom)}}
+            </div>
+        </div>
+        {{ form_row(formAddStagiaire.genre)}}
+        {{ form_row(formAddStagiaire.dateNaissance)}}
+        {{ form_row(formAddStagiaire.ville)}}
+        <div class="row">
+            <div class="col-sm">
+                {{ form_row(formAddStagiaire.email)}}
+            </div>
+            <div class="col-sm">
+                {{ form_row(formAddStagiaire.telephone)}}
+            </div>
+        </div>
+        {{ form_row(formAddStagiaire.valider)}}
+    {{ form_end(formAddStagiaire) }}
+
+{% endblock %}
