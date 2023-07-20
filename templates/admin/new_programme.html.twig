@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Ajouter une programme{% endblock %}
+
+{% block body %}
+    {% if edit %}
+    <h1>Editer un programme</h1>
+    {% else %}
+    <h1>Ajouter un programme</h1>
+    {% endif %}
+
+    {{ form_start(formAddProgramme) }}
+        {{ form_row(formAddProgramme.session)}}
+        {{ form_row(formAddProgramme.matiere)}}
+        {{ form_row(formAddProgramme.valider)}}
+    {{ form_end(formAddProgramme) }}
+
+{% endblock %}
