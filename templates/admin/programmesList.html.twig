@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des programmes{% endblock %}
+
+{% block body %}
+    <h1>Liste des programmes</h1>
+
+    <a href="{{ path('new_programme') }}" class="btn btn-success">Ajouter un programme</a><br/>
+    {% for programme in programmes %}
+        <a href="{{ path('show_programme', {'id': programme.id}) }}">{{ programme }}</a> <br/>
+        <a class="btn btn-warning" href="{{ path('edit_programme', {'id': programme.id}) }}">Edit</a>
+        <a class="btn btn-danger" href="{{ path('delete_programme', {'id': programme.id}) }}">Supp</a><br/>
+    {% endfor %}
+    
+{% endblock %}
