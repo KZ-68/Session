@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des matieres{% endblock %}
+
+{% block body %}
+    <h1>Liste des matieres</h1>
+
+    <a href="{{ path('new_matiere') }}" class="btn btn-success">Ajouter un matiere</a><br/>
+    {% for matiere in matieres %}
+        <a href="">{{ matiere.denomination }}</a> <br/>
+        <a class="btn btn-warning" href="{{ path('edit_matiere', {'id': matiere.id}) }}">Edit</a>
+    {% endfor %}
+    
+{% endblock %}
