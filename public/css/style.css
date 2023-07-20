@@ -1,0 +1,28 @@
+header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(80, 80, 80);
+}
+
+li {
+    list-style-type: none;
+}
+
+.list-left {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.list-right {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+}
