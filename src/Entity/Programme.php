@@ -24,6 +24,11 @@ class Programme
     #[ORM\Column]
     private ?int $duree = null;
 
+    public function __toString()
+    {
+        return $this->id.' Intitulé : '.$this->session->getFormation()->getIntituleFormation().' Matière : '.$this->matiere->getDenomination();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
