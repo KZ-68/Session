@@ -31,7 +31,7 @@ class Session
     private Collection $stagiaires;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true,  onDelete:"SET NULL")]
     private ?Formation $formation = null;
 
     #[ORM\OneToMany(mappedBy: 'sessions', targetEntity: Programme::class)]

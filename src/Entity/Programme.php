@@ -14,7 +14,7 @@ class Programme
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'programmes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true,  onDelete:"SET NULL")]
     private ?Session $session = null;
 
     #[ORM\ManyToOne(inversedBy: 'programmes')]
