@@ -1,9 +1,13 @@
+header {
+    padding: 20px 20px 20px 0px;
+    background-color: rgb(80, 80, 80);
+
+}
+
 header nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(80, 80, 80);
-    padding: 20px 20px 20px 0px;
 }
 
 footer {
@@ -36,4 +40,116 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#openBtn {
+    padding-right: 25px;
+    display: none;
+}
+
+.sidenav {
+    height: 239px;
+    width: 150px;
+    position: fixed;
+    z-index: 2;
+    top: 64px;
+    left: -250px;
+    background: rgb(47 37 69);
+    padding-top: 22px;
+    transition: left 0.5s ease;
+    border-radius: 5px;
+    filter: opacity(0.9);
+    display: none;
+}
+
+.home-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-authentification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    background-color: rgb(61 61 61);
+    padding: 15px 20px 15px 20px;
+    margin-bottom: 25px;
+}
+
+.authentification-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    padding-bottom: 25px;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    header {
+        padding: 8px 20px 20px 0px;
+        background-color: rgb(80, 80, 80);
+    }
+    
+
+    header nav {
+        display: none;
+    }
+
+    .sidenav a {
+        text-decoration: none;
+        font-size: 13px;
+        color: #9c9cc0;
+        display: block;
+        transition: 0.1s;
+    }
+      
+    .sidenav a:hover {
+        color: #111;
+    }
+      
+    .sidenav ul {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .linkTop {
+        padding: 0;
+        padding-left: 10px;
+    }
+
+    .sidenav {
+        display: block;
+    }
+
+    .sidenav.active {
+        left: 0px;
+    }
+      
+    .sidenav .close {
+        position: absolute;
+        top: -10px;
+        right: 8px;
+        font-size: 36px;
+    }
+    
+    .burger-icon span {
+        display: block;
+        width: 35px;
+        height: 5px;
+        background-color: rgb(255, 255, 255);
+        margin: 6px 0;
+        position: relative;
+        left: 25px;
+    }
+
+    #openBtn {
+        padding-right: 25px;
+        display: block;
+    }
 }
