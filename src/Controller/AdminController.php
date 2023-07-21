@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Matiere;
 use App\Entity\Categorie;
+use App\Entity\Formation;
 use App\Entity\Programme;
 use App\Form\MatiereType;
 use App\Form\CategorieType;
+use App\Form\FormationType;
 use App\Form\ProgrammeType;
 use App\Repository\MatiereRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\FormationRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,8 +40,16 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('admin/matiere/new', name: 'new_matiere')]
-    #[Route('admin/matiere/{id}/edit', name: 'edit_matiere')]
+    #[Route('/admin/matiere/{id}/show', name: 'show_matiere')]
+    public function showMatiere(Matiere $matiere): Response 
+    {
+        return $this->render('admin/showMatiere.html.twig', [
+            'matiere' => $matiere
+        ]);
+    }
+
+    #[Route('/admin/matiere/new', name: 'new_matiere')]
+    #[Route('/admin/matiere/{id}/edit', name: 'edit_matiere')]
     public function new_edit_matiere(Matiere $matiere = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$matiere) {
@@ -62,7 +73,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/matiere/{id}/delete', name: 'delete_matiere')]
+    #[Route('/admin/matiere/{id}/delete', name: 'delete_matiere')]
     public function deleteMatiere(Matiere $matiere, EntityManagerInterface $entityManager) {
         // Prépare la suppression d'une instance de l'objet 
         $entityManager->remove($matiere);
@@ -81,8 +92,16 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('admin/categorie/new', name: 'new_categorie')]
-    #[Route('admin/categorie/{id}/edit', name: 'edit_categorie')]
+    #[Route('/admin/categorie/{id}/show', name: 'show_categorie')]
+    public function showCategorie(Categorie $categorie): Response 
+    {
+        return $this->render('admin/showCategorie.html.twig', [
+            'categorie' => $categorie
+        ]);
+    }
+
+    #[Route('/admin/categorie/new', name: 'new_categorie')]
+    #[Route('/admin/categorie/{id}/edit', name: 'edit_categorie')]
     public function new_edit_categorie(Categorie $categorie = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$categorie) {
@@ -106,8 +125,18 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/categorie/{id}/delete', name: 'delete_categorie')]
+    public function deletecategorie(Categorie $categorie, EntityManagerInterface $entityManager) {
+        // Prépare la suppression d'une instance de l'objet 
+        $entityManager->remove($categorie);
+        // Exécute la suppression
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_categorie');
+    }
+
     #[Route('/admin/programme', name: 'app_programme')]
-    public function programmesListe(ProgrammeRepository $programmeRepository): Response 
+    public function programmesList(ProgrammeRepository $programmeRepository): Response 
     {
         $programmes = $programmeRepository->findBy([], ["duree" => "ASC"]);
         return $this->render('admin/programmesList.html.twig', [
@@ -115,8 +144,8 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('admin/programme/new', name: 'new_programme')]
-    #[Route('admin/programme/{id}/edit', name: 'edit_programme')]
+    #[Route('/admin/programme/new', name: 'new_programme')]
+    #[Route('/admin/programme/{id}/edit', name: 'edit_programme')]
     public function new_edit_programme(Programme $programme = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$programme) {
@@ -140,7 +169,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/programme/{id}/delete', name: 'delete_programme')]
+    #[Route('/admin/programme/{id}/delete', name: 'delete_programme')]
     public function deleteProgramme(Programme $programme, EntityManagerInterface $entityManager) {
         // Prépare la suppression d'une instance de l'objet 
         $entityManager->remove($programme);
@@ -148,5 +177,57 @@ class AdminController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_programme');
+    }
+
+    #[Route('/admin/formation', name: 'app_formation')]
+    public function formationsList(FormationRepository $formationRepository): Response 
+    {
+        $formations = $formationRepository->findBy([], ["intituleFormation" => "ASC"]);
+        return $this->render('admin/formationsList.html.twig', [
+            'formations' => $formations
+        ]);
+    }
+
+    #[Route('/admin/formation/{id}/show', name: 'show_formation')]
+    public function showformation(Formation $formation): Response 
+    {
+        return $this->render('admin/showFormation.html.twig', [
+            'formation' => $formation
+        ]);
+    }
+
+    #[Route('/admin/formation/new', name: 'new_formation')]
+    #[Route('/admin/formation/{id}/edit', name: 'edit_formation')]
+    public function new_edit_formation(Formation $formation = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if (!$formation) {
+            $formation = new Formation();
+        }
+
+        $form = $this->createForm(FormationType::class, $formation);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formation = $form->getData();
+            $entityManager->persist($formation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_formation');
+        }
+
+        return $this->render('admin/new_formation.html.twig', [
+            'formAddFormation' => $form,
+            'edit' => $formation->getId()
+        ]);
+    }
+
+    #[Route('/admin/formation/{id}/delete', name: 'delete_formation')]
+    public function deleteformation(Formation $formation, EntityManagerInterface $entityManager) {
+        // Prépare la suppression d'une instance de l'objet 
+        $entityManager->remove($formation);
+        // Exécute la suppression
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_formation');
     }
 }
