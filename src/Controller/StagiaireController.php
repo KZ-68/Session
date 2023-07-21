@@ -54,7 +54,7 @@ class StagiaireController extends AbstractController
         ]);
     }
 
-    #[Route('/stagiaire/{id}/delete', name: 'delete_stagiaire')]
+    #[Route('/admin/stagiaire/{id}/delete', name: 'delete_stagiaire')]
     public function delete(Stagiaire $stagiaire, EntityManagerInterface $entityManager) {
         // Prépare la suppression d'une instance de l'objet 
         $entityManager->remove($stagiaire);
