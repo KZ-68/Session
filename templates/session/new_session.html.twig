@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Ajouter une session{% endblock %}
+
+{% block body %}
+    {% if edit %}
+    <h1>Editer une session</h1>
+    {% else %}
+    <h1>Ajouter une session</h1>
+    {% endif %}
+
+    {{ form_start(formAddSession) }}
+        {{ form_row(formAddSession.dateDebut)}}
+        {{ form_row(formAddSession.dateFin)}}
+        {{ form_row(formAddSession.nbMax)}}
+        {{ form_row(formAddSession.formation)}}
+        {{ form_row(formAddSession.valider)}}
+    {{ form_end(formAddSession) }}
+
+{% endblock %}
