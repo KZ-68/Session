@@ -7,7 +7,11 @@
 
     <a href="{{ path('new_programme') }}" class="btn btn-success">Ajouter un programme</a><br/>
     {% for programme in programmes %}
-        <a href="{{ path('show_programme', {'id': programme.id}) }}">{{ programme }}</a> <br/>
+    {% if programme.session != NULL %}
+        <a href="{{ path('show_programme_admin', {'id': programme.id}) }}">{{ programme }}</a> <br/>
+    {% else %}
+        <p> {{ programme.id }} Aucun session lié à ce programme</p>
+    {% endif %}
         <a class="btn btn-warning" href="{{ path('edit_programme', {'id': programme.id}) }}">Edit</a>
         <a class="btn btn-danger" href="{{ path('delete_programme', {'id': programme.id}) }}">Supp</a><br/>
     {% endfor %}
