@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'un programme{% endblock %}
+
+{% block body %}
+    <h1>Détail d'un programme</h1>
+    
+    <table class="table table-striped">
+        <thead>
+            <th>Module</th>
+            <th>Nb jours</th>
+        </thead>
+        <tbody>
+        
+            {% for programme in session.programmes %}
+        <tr>
+            <td>{{programme.matiere.categorie.titre}}</td>
+        </tr>
+        <tr>
+            <td>{{ programme.matiere.denomination }}</td>
+            <td>{{ programme.duree }} jours</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+{% endblock %}
