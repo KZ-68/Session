@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Détails de la session{% endblock %}
+
+{% block body %}
+    <h1>Détails de la session</h1>
+
+    <p>
+       Intitulé : {{ session.formation.intituleFormation }} {{ session.dateDebut | date('Y M')}} <br/>
+       Date de début de Session : {{ session.dateDebut| date("d/m/Y") }} <br/>
+       Date de fin de Session : {{ session.dateFin | date("d/m/Y")}} <br/>
+    </p>
+
+    <h3>Stagiaire inscrits à cette session :</h3>
+    {% if session.stagiaires | length > 0 %}
+        {% for session in session.stagiaires %}
+        <a href="">{{session.prenom}} {{session.nom}}</a><br/>
+        {% endfor %}
+    {% else %}
+        <p>Aucun stagiaire inscrit à cette session.</p>
+    {% endif %}
+
+{% endblock %}
