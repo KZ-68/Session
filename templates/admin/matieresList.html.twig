@@ -7,8 +7,9 @@
 
     <a href="{{ path('new_matiere') }}" class="btn btn-success">Ajouter un matiere</a><br/>
     {% for matiere in matieres %}
-        <a href="">{{ matiere.denomination }}</a> <br/>
+        <a href="{{ path('show_matiere', {'id': matiere.id}) }}">{{ matiere.denomination }}</a> <br/>
         <a class="btn btn-warning" href="{{ path('edit_matiere', {'id': matiere.id}) }}">Edit</a>
+        <a class="btn btn-danger" href="{{ path('delete_matiere', {'id': matiere.id}) }}">Supp</a><br/>
     {% endfor %}
     
 {% endblock %}
