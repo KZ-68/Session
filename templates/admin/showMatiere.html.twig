@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'une matiere{% endblock %}
+
+{% block body %}
+    <h1>Détail d'une matiere</h1>
+    
+    <p>
+        Nom de la matière : {{ matiere.denomination }}<br/>
+        Catégorie lié à cette matière : <a href="{{ path('show_categorie', {'id': matiere.categorie.id}) }}">{{ matiere.categorie.titre }}</a>
+    </p>
+    
+{% endblock %}
