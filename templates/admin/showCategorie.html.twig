@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'une categorie{% endblock %}
+
+{% block body %}
+    <h1>Détail d'une categorie</h1>
+    
+    <p>
+        Titre de la categorie : {{ categorie.titre }}<br/>
+        Liste des matières liés à cette categorie : 
+        <table class="table table-striped">
+            <thead>
+                <th>Dénomination</th>
+            </thead>
+            <tbody>
+                {% for matiere in categorie.matieres %}
+                <tr>
+                    <td>
+                        <p><a href="{{ path('show_matiere', {'id': matiere.id}) }}">{{ matiere.denomination }}</a><br/></p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+       
+    </p>
+    
+{% endblock %}
