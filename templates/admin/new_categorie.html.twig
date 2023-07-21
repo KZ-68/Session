@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Ajouter une catégorie{% endblock %}
+
+{% block body %}
+    {% if edit %}
+    <h1>Editer une catégorie</h1>
+    {% else %}
+    <h1>Ajouter une catégorie</h1>
+    {% endif %}
+
+    {{ form_start(formAddCategorie) }}
+        {{ form_row(formAddCategorie.titre) }}
+        {{ form_row(formAddCategorie.valider) }}
+    {{ form_end(formAddCategorie) }}
+
+{% endblock %}
