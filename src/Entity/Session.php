@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\SessionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -158,6 +160,12 @@ class Session
     }
 
     public function getDureeDate(): ?string {
-        return "(du ".$this->dateDebut->format('d-m-Y')." au ".$this->dateFin->format('d-m-Y').")";
+        return "(du ".$this->dateDebut->format('d/m/Y')." au ".$this->dateFin->format('d/m/Y').")";
     }
-}
+
+    public function getCurrentTime(): ?\DateTime{
+        $currentTime = new DateTime();
+        $currentTime->format('d/m/Y');
+        return $currentTime;
+    }
+} 
