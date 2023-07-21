@@ -40,6 +40,8 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /* Attention : Si plusieurs view ont dans le nom de la route un identifiant et se trouve dans le même dossier
+    il faut une ajouter une sépération supplémentaire après l'identifiant */
     #[Route('/admin/matiere/{id}/show', name: 'show_matiere')]
     public function showMatiere(Matiere $matiere): Response 
     {
@@ -177,6 +179,14 @@ class AdminController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_programme');
+    }
+
+    #[Route('/admin/programme/{id}/show', name: 'show_programme_admin')]
+    public function showProgramme(Programme $programme): Response 
+    {
+        return $this->render('admin/showProgramme.html.twig', [
+            'programme' => $programme
+        ]);
     }
 
     #[Route('/admin/formation', name: 'app_formation')]
