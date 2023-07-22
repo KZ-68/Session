@@ -21,7 +21,6 @@
             {% for session in sessions %}
             <tr>
                 <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }}</a>
-                    <a class="btn btn-success" href="{{ path('add_stagiaires_session', {'id': session.id}) }}">Inscrire des stagiaires à cette session</a>
                     <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
                     <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
                 </td>
