@@ -22,13 +22,16 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
+    /* 3 Méthodes qui utilise les requêtes DQL pour afficher les sessions en fonction d'une date de début et de fin*/
     public function findCurrentSessionsByDate() :array {
         
+        // Crée une instance du builder qui prends l'entité du Repository (Session), avec en argument l'alias
         return $this->createQueryBuilder('s')
-        ->andWhere('CURRENT_DATE() > s.dateDebut AND CURRENT_DATE() < s.dateFin')
-        ->orderBy('s.dateDebut', 'ASC')
-        ->getQuery()
-        ->getResult()
+        // Les paramètres pour construire la requête :
+        ->andWhere('CURRENT_DATE() > s.dateDebut AND CURRENT_DATE() < s.dateFin') // Paramètre des restrictions en WHERE
+        ->orderBy('s.dateDebut', 'ASC') // Paramètre d'ordre d'affichage
+        ->getQuery() // Construit la requête en fonction des paramètres et arguments demandés par le builder
+        ->getResult() // Donne le résultat 
     ;
     }
 
