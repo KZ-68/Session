@@ -55,62 +55,24 @@
                 <th>Voir Programme</th>
             </thead>
             <tbody>
-            {% for session in sessions %}
-            {% if session.currentTime > session.dateDebut  and session.currentTime < session.dateFin  %}
+            {% for currentSession in currentSessions %}
             <tr>
-                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }}</a></td>
-                <td>{{ session.dateDebut | date("d/m/Y") }}</td>
-                <td>{{ session.dateFin | date("d/m/Y") }}</td>
-                <td>{{ session.nbMax }}</td>
-                <td>{{ session.nbInscrit }}</td>
-                <td>{{ session.nbPlacesRestante }}</td>
+                <td><a href="{{ path('show_session', {'id': currentSession.id})}}">{{ currentSession.formation.intituleFormation }}</a></td>
+                <td>{{ currentSession.dateDebut | date("d/m/Y") }}</td>
+                <td>{{ currentSession.dateFin | date("d/m/Y") }}</td>
+                <td>{{ currentSession.nbMax }}</td>
+                <td>{{ currentSession.nbInscrit }}</td>
+                <td>{{ currentSession.nbPlacesRestante }}</td>
                 <td>
-                    <a href="{{ path('show_programme', {'id': session.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                    <a href="{{ path('show_programme', {'id': currentSession.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                     </svg></a>
                 </td>
             </tr>
-            {% endif %}
             {% endfor %}
             </tbody>
         </table>
     </div>
-
-    <h3>Sessions terminées :</h3>
-
-    <div class="table-responsive-sm">
-        <table class="table table-striped">
-            <thead>
-                <th>Intitulé Session</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Nb Places Théoriques</th>
-                <th>Nb Places Réservées</th>
-                <th>Nb Places Restantes</th>
-                <th>Voir Programme</th>
-            </thead>
-            <tbody>
-                
-            {% for session in sessions %}
-            {% if session.currentTime > session.dateDebut  and session.currentTime  > session.dateFin  %}
-            <tr>
-                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }}</a></td>
-                <td>{{ session.dateDebut | date("d/m/Y") }}</td>
-                <td>{{ session.dateFin | date("d/m/Y") }}</td>
-                <td>{{ session.nbMax }}</td>
-                <td>{{ session.nbInscrit }}</td>
-                <td>{{ session.nbPlacesRestante }}</td>
-                <td>
-                    <a href="{{ path('show_programme', {'id': session.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                    </svg></a>
-                </td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>    
-    </div> 
 
     <h3>Sessions à venir :</h3>
 
@@ -127,22 +89,54 @@
             </thead>
             <tbody>
                 
-            {% for session in sessions %}
-            {% if session.currentTime < session.dateDebut  and session.currentTime  < session.dateFin  %}
+            {% for nextSession in nextSessions %}
             <tr>
-                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }}</a></td>
-                <td>{{ session.dateDebut | date("d/m/Y") }}</td>
-                <td>{{ session.dateFin | date("d/m/Y") }}</td>
-                <td>{{ session.nbMax }}</td>
-                <td>{{ session.nbInscrit }}</td>
-                <td>{{ session.nbPlacesRestante }}</td>
+                <td><a href="{{ path('show_session', {'id': nextSession.id})}}">{{ nextSession.formation.intituleFormation }}</a></td>
+                <td>{{ nextSession.dateDebut | date("d/m/Y") }}</td>
+                <td>{{ nextSession.dateFin | date("d/m/Y") }}</td>
+                <td>{{ nextSession.nbMax }}</td>
+                <td>{{ nextSession.nbInscrit }}</td>
+                <td>{{ nextSession.nbPlacesRestante }}</td>
                 <td>
-                    <a href="{{ path('show_programme', {'id': session.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                    <a href="{{ path('show_programme', {'id': nextSession.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                     </svg></a>
                 </td>
             </tr>
-            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>    
+    </div> 
+
+    <h3>Sessions terminées :</h3>
+
+    <div class="table-responsive-sm">
+        <table class="table table-striped">
+            <thead>
+                <th>Intitulé Session</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Nb Places Théoriques</th>
+                <th>Nb Places Réservées</th>
+                <th>Nb Places Restantes</th>
+                <th>Voir Programme</th>
+            </thead>
+            <tbody>
+                
+            {% for oldSession in oldSessions %}
+            <tr>
+                <td><a href="{{ path('show_session', {'id': oldSession.id})}}">{{ oldSession.formation.intituleFormation }}</a></td>
+                <td>{{ oldSession.dateDebut | date("d/m/Y") }}</td>
+                <td>{{ oldSession.dateFin | date("d/m/Y") }}</td>
+                <td>{{ oldSession.nbMax }}</td>
+                <td>{{ oldSession.nbInscrit }}</td>
+                <td>{{ oldSession.nbPlacesRestante }}</td>
+                <td>
+                    <a href="{{ path('show_programme', {'id': oldSession.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg></a>
+                </td>
+            </tr>
             {% endfor %}
             </tbody>
         </table>    
