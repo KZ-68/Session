@@ -55,7 +55,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/session/{id}/add', name: 'add_stagiaires_session')]
+    #[Route('/session/{id}/show/add', name: 'add_stagiaires_session')]
     public function add_stagiaires_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
 
@@ -67,7 +67,7 @@ class SessionController extends AbstractController
             $entityManager->persist($session);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_session');
+            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
         }
 
         return $this->render('session/add_stagiaires_session.html.twig', [
