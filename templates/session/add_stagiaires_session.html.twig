@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Inscrire un ou des stagiaires à une session{% endblock %}
+
+{% block body %}
+
+    <h1>Inscrire un ou des stagiaires à une session</h1>
+
+    {{ form_start(formAddStagiairesSession) }}
+        {{ form_row(formAddStagiairesSession.stagiaires)}}
+        {{ form_row(formAddStagiairesSession.valider)}}
+    {{ form_end(formAddStagiairesSession) }}
+
+{% endblock %}
