@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Form\SessionType;
+use App\Form\ProgrammesSessionType;
 use App\Form\StagiairesSessionType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,8 +56,8 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/session/{id}/show/add', name: 'add_stagiaires_session')]
-    public function add_stagiaires_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/session/{id}/show/editStagiaires', name: 'edit_stagiaires_session')]
+    public function edit_stagiaires_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
 
         $form = $this->createForm(StagiairesSessionType::class, $session);
@@ -70,9 +71,30 @@ class SessionController extends AbstractController
             return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
         }
 
-        return $this->render('session/add_stagiaires_session.html.twig', [
-            'formAddStagiairesSession' => $form,
-            'add' => $session->getId()
+        return $this->render('session/edit_stagiaires_session.html.twig', [
+            'formEditStagiairesSession' => $form,
+            'edit' => $session->getId()
+        ]);
+    }
+
+    #[Route('/session/{id}/show/editProgrammes', name: 'edit_programmes_session')]
+    public function edit_programmes_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        $form = $this->createForm(ProgrammesSessionType::class, $session);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $session = $form->getData();
+            $entityManager->persist($session);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+        }
+
+        return $this->render('session/edit_programmes_session.html.twig', [
+            'formEditProgrammesSession' => $form,
+            'edit' => $session->getId()
         ]);
     }
 
