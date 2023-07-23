@@ -20,6 +20,7 @@
         <p>Aucun stagiaire inscrit à cette session.</p>
     {% endif %}
 
-    <a class="btn btn-success" href="{{ path('add_stagiaires_session', {'id': session.id}) }}">Inscrire ou retirer des stagiaires à cette session</a>
+    <a class="btn btn-success" href="{{ path('edit_stagiaires_session', {'id': session.id}) }}">Inscrire ou retirer des stagiaires à cette session</a>
+    <a class="btn btn-success" href="{{ path('edit_programmes_session', {'id': session.id}) }}">Programmer ou déprogrammer une matière à cette session</a>
 
 {% endblock %}
