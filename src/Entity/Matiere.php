@@ -22,7 +22,7 @@ class Matiere
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\OneToMany(mappedBy: 'matieres', targetEntity: Programme::class)]
+    #[ORM\OneToMany(mappedBy: 'matiere', targetEntity: Programme::class)]
     private Collection $programmes;
 
     public function __construct()

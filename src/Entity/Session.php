@@ -34,7 +34,7 @@ class Session
     #[ORM\JoinColumn(nullable: true,  onDelete:"SET NULL")]
     private ?Formation $formation = null;
 
-    #[ORM\OneToMany(mappedBy: 'sessions', targetEntity: Programme::class)]
+    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Programme::class)]
     private Collection $programmes;
 
     public function __construct()
