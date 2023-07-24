@@ -34,13 +34,17 @@ class Session
     #[ORM\JoinColumn(nullable: true,  onDelete:"SET NULL")]
     private ?Formation $formation = null;
 
-    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Programme::class)]
+    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Programme::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $programmes;
 
     public function __construct()
     {
         $this->stagiaires = new ArrayCollection();
         $this->programmes = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->formation->getIntituleFormation(). " ".$this->dateDebut->format('m Y');
     }
 
     public function getId(): ?int
