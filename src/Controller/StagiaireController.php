@@ -35,7 +35,7 @@ class StagiaireController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() retient les valeurs soumises
-            // mais la variable $entreprise est également mise à jour
+            // mais la variable $stagiaire est également mise à jour
              $stagiaire = $form->getData();
             
             /* persist dit à Doctrine de sauvegarder dans une instance l'objet en argument,
