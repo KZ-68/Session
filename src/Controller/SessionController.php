@@ -7,6 +7,8 @@ use App\Form\SessionType;
 use App\Form\ProgrammesSessionType;
 use App\Form\StagiairesSessionType;
 use App\Repository\SessionRepository;
+use App\Repository\ProgrammeRepository;
+use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,9 +53,20 @@ class SessionController extends AbstractController
         }
 
         return $this->render('session/new_session.html.twig', [
-            'formAddSession' => $form,
-            'edit' => $session->getId()
+            'form' => $form,
+            'sessionId' => $session->getId()
         ]);
+    }
+
+    #[Route('/session/{id}/delete', name: 'delete_session')]
+    public function deleteSession(Session $session, EntityManagerInterface $entityManager) {
+        // Prépare la suppression d'une instance de l'objet 
+
+        $entityManager->remove($session);
+        // Exécute la suppression
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_session');
     }
 
     #[Route('/session/{id}/show/editStagiaires', name: 'edit_stagiaires_session')]
@@ -106,22 +119,15 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/session/{id}/delete', name: 'delete_session')]
-    public function deleteSession(Session $session, EntityManagerInterface $entityManager) {
-        // Prépare la suppression d'une instance de l'objet 
-
-        $entityManager->remove($session);
-        // Exécute la suppression
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_session');
-    }
-
     #[Route('/session/{id}/show', name: 'show_session')]
-    public function showSession(Session $session): Response 
+    public function showSession(Session $session, StagiaireRepository $stagiaireRepository, ProgrammeRepository $programmeRepository): Response 
     {
+        $stagiaires = $stagiaireRepository->findNonRegisteredStagiairesInSession($session->getId());
+        $programmes = $programmeRepository->findNonRegisteredMatieresInSession($session->getId());
         return $this->render('session/showSession.html.twig', [
-            'session' => $session
+            'session' => $session,
+            'stagiaires' => $stagiaires,
+            'programmes' => $programmes
         ]);
     }
 }
