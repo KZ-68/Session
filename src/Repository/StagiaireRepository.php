@@ -21,6 +21,34 @@ class StagiaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Stagiaire::class);
     }
 
+    public function findNonRegisteredStagiairesInSession(int $session) {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder(); 
+        $qb = $sub; 
+        $qb->select('s') 
+            ->from('App\Entity\Stagiaire', 's') 
+            ->leftJoin('s.sessions', 'se') 
+            ->where('se.id = :id');
+        $sub = $em->createQueryBuilder();
+        $sub->select('st')->from('App\Entity\Stagiaire', 'st')
+            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
+            ->setParameter(':id', $session);
+        return $sub->getQuery()->getResult();
+
+        // $stg = $this->createQueryBuilder('sa1')
+        // ->select('sa1.prenom', 'sa1.nom')
+        // ->leftJoin('sa1.sessions', 'session')
+        // ->where('session.id = :id');
+        
+        // $nonStg = $this->createQueryBuilder('sa')
+        // ->where('sa.id NOT IN ('.$stg->getDQL().')')
+        // ->setParameter(':id', $session);
+        // $stg = $nonStg;
+        // return $nonStg->getQuery()
+        // ->getResult()
+    ;
+    }
+
 //    /**
 //     * @return Stagiaire[] Returns an array of Stagiaire objects
 //     */
