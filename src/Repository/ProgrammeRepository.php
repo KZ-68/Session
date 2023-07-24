@@ -21,6 +21,22 @@ class ProgrammeRepository extends ServiceEntityRepository
         parent::__construct($registry, Programme::class);
     }
 
+    public function findNonRegisteredMatieresInSession(int $session) {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder(); 
+        $qb = $sub; 
+        $qb->select('p') 
+            ->from('App\Entity\Programme', 'p') 
+            ->leftJoin('p.session', 's')
+            ->where('s.id = :id');
+        $sub = $em->createQueryBuilder(); 
+        $sub->select('pr')->from('App\Entity\Programme', 'pr')
+            ->where($sub->expr()->notIn('pr.id', $qb->getDQL()))
+            ->setParameter(':id', $session);
+        return $sub->getQuery()->getResult();
+    ;
+    }
+
 //    /**
 //     * @return Programme[] Returns an array of Programme objects
 //     */
