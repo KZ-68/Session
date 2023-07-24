@@ -7,7 +7,7 @@
     
     <p>
         Nom de la matière : {{ matiere.denomination }}<br/>
-        Catégorie lié à cette matière : <a href="{{ path('show_categorie', {'id': matiere.categorie.id}) }}">{{ matiere.categorie.titre }}</a>
+        Catégorie lié à cette matière : <a href="{{ path('show_categorie', {'id': matiere.categorie.id}) }}" aria-label="Categorie Details">{{ matiere.categorie.titre }}</a>
     </p>
     
 {% endblock %}

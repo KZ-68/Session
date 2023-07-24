@@ -8,9 +8,9 @@
     <a href="{{ path('new_categorie') }}" class="btn btn-success">Ajouter un categorie</a><br/>
     {% for categorie in categories %}
         <p>
-            <a href="{{ path('show_categorie', {'id': categorie.id}) }}">{{ categorie.titre }}</a>
-            <a class="btn btn-warning" href="{{ path('edit_categorie', {'id': categorie.id}) }}">Edit</a>
-            <a class="btn btn-danger" href="{{ path('delete_categorie', {'id': categorie.id}) }}">Supp</a><br/>
+            <a href="{{ path('show_categorie', {'id': categorie.id}) }}" aria-label="Categorie Details">{{ categorie.titre }}</a>
+            <a class="btn btn-warning" href="{{ path('edit_categorie', {'id': categorie.id}) }}" aria-label="Edit">Edit</a>
+            <a class="btn btn-danger" href="{{ path('delete_categorie', {'id': categorie.id}) }}" aria-label="Suppr">Supp</a><br/>
         </p>
     
     {% endfor %}

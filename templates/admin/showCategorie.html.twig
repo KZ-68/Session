@@ -16,7 +16,7 @@
                 {% for matiere in categorie.matieres %}
                 <tr>
                     <td>
-                        <p><a href="{{ path('show_matiere', {'id': matiere.id}) }}">{{ matiere.denomination }}</a><br/></p>
+                        <p><a href="{{ path('show_matiere', {'id': matiere.id}) }}" aria-label="Matiere Details">{{ matiere.denomination }}</a><br/></p>
                     </td>
                 </tr>
                 {% endfor %}
