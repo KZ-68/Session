@@ -6,8 +6,8 @@ use App\Entity\Session;
 use App\Form\SessionType;
 use App\Form\ProgrammesSessionType;
 use App\Form\StagiairesSessionType;
+use App\Repository\MatiereRepository;
 use App\Repository\SessionRepository;
-use App\Repository\ProgrammeRepository;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -106,7 +106,7 @@ class SessionController extends AbstractController
         }
 
         return $this->render('session/edit_programmes_session.html.twig', [
-            'formEditProgrammesSession' => $form,
+            'form' => $form,
             'edit' => $session->getId()
         ]);
     }
@@ -120,14 +120,14 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/show', name: 'show_session')]
-    public function showSession(Session $session, StagiaireRepository $stagiaireRepository, ProgrammeRepository $programmeRepository): Response 
+    public function showSession(Session $session, StagiaireRepository $stagiaireRepository, MatiereRepository $matiereRepository): Response 
     {
         $stagiaires = $stagiaireRepository->findNonRegisteredStagiairesInSession($session->getId());
-        $programmes = $programmeRepository->findNonRegisteredMatieresInSession($session->getId());
+        $matieres = $matiereRepository->findNonRegisteredMatieresInSession($session->getId());
         return $this->render('session/showSession.html.twig', [
             'session' => $session,
             'stagiaires' => $stagiaires,
-            'programmes' => $programmes
+            'matieres' => $matieres
         ]);
     }
 }
