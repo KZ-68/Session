@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Matiere;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Matiere>
@@ -20,6 +20,24 @@ class MatiereRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Matiere::class);
     }
+
+    public function findNonRegisteredMatieresInSession(int $session) {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder(); 
+        $qb = $sub; 
+        $qb->select('m') 
+            ->from('App\Entity\Matiere', 'm') 
+            ->innerJoin('m.programmes', 'p', 'WITH', 'p.matiere = m.id')
+            ->innerJoin('p.session', 's', 'WITH', 's.id = p.session')
+            ->where('s.id = :id');
+        $sub = $em->createQueryBuilder(); 
+        $sub->select('ma')->from('App\Entity\Matiere', 'ma')
+            ->where($sub->expr()->notIn('ma.id', $qb->getDQL()))
+            ->setParameter(':id', $session);
+        return $sub->getQuery()->getResult();
+    ;
+    }
+
 
 //    /**
 //     * @return Matiere[] Returns an array of Matiere objects
