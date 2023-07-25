@@ -16,12 +16,12 @@
                 <ul class="list-left">
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
                     <li><a href="{{ path('app_stagiaire') }}">Liste des stagiaires</a></li> 
-                    <li><a href="{{ path('app_session') }}">Liste des session</a></li>
+                    <li><a href="{{ path('app_session') }}">Liste des sessions</a></li>
                     <li><a href="{{ path('app_admin') }}">Page administrateur</a></li>
                 </ul>
                 <ul class="list-right">
-                    <li><a href="">Inscription</a></li> 
-                    <li><a href="">Connexion</a></li>
+                    <li><a href="{{ path('app_register') }}">Inscription</a></li> 
+                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
                 </ul>
             </nav>
             <div id="mySidenav" class="sidenav">
@@ -29,10 +29,10 @@
                 <ul>
                     <li><a class="linkTop" href="{{ path('app_home') }}">Accueil</a></li>
                     <li><a class="linkTop" href="{{ path('app_stagiaire') }}">Liste des stagiaires</a></li>
-                    <li><a class="linkTop" href="{{ path('app_session') }}">Liste des session</a></li>
+                    <li><a class="linkTop" href="{{ path('app_session') }}">Liste des sessions</a></li>
                     <li><a class="linkTop" href="{{ path('app_admin') }}">Page administrateur</a></li>
-                    <li><a class="linkTop" href="">Inscription</a></li>
-                    <li><a class="linkTop" href="">Connexion</a></li>
+                    <li><a class="linkTop" href="{{ path('app_register') }}">Inscription</a></li>
+                    <li><a class="linkTop" href="{{ path('app_login') }}">Connexion</a></li>
                     <li><a class="linkTop" href="">Déconnexion</a></li>
                 </ul>
             </div>
