@@ -5,12 +5,11 @@
 {% block body %}
     <h1>Liste des programmes</h1>
 
-    <a href="{{ path('new_programme') }}" class="btn btn-success" aria-label="Ajouter un programme">Ajouter un programme</a><br/>
     {% for programme in programmes %}
     {% if programme.session != NULL %}
         <a href="{{ path('show_programme_admin', {'id': programme.id}) }}" aria-label="Programme Details">{{ programme }}</a> <br/>
     {% else %}
-        <p> {{ programme.id }} Aucun session lié à ce programme</p>
+        <p> {{ programme.id }} Aucun programme disponible</p>
     {% endif %}
         <a class="btn btn-warning" href="{{ path('edit_programme', {'id': programme.id}) }}" aria-label="Edit">Edit</a>
         <a class="btn btn-danger" href="{{ path('delete_programme', {'id': programme.id}) }}" aria-label="Suppr">Suppr</a><br/>
