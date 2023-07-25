@@ -15,14 +15,20 @@
             <nav>
                 <ul class="list-left">
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_stagiaire') }}">Liste des stagiaires</a></li> 
+                    <li><a href="{{ path('app_formation') }}">Liste des formations</a></li>
                     <li><a href="{{ path('app_session') }}">Liste des sessions</a></li>
                     <li><a href="{{ path('app_admin') }}">Page administrateur</a></li>
                 </ul>
-                <ul class="list-right">
-                    <li><a href="{{ path('app_register') }}">Inscription</a></li> 
-                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
-                </ul>
+                {% if app.user%}
+                    <ul class="list-right">
+                        <li><a class="linkTop" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="list-right">
+                        <li><a href="{{ path('app_register') }}">Inscription</a></li> 
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    </ul>
+                {% endif %}
             </nav>
             <div id="mySidenav" class="sidenav">
                 <a id="closeBtn" href="#" class="close">×</a>
@@ -31,9 +37,13 @@
                     <li><a class="linkTop" href="{{ path('app_stagiaire') }}">Liste des stagiaires</a></li>
                     <li><a class="linkTop" href="{{ path('app_session') }}">Liste des sessions</a></li>
                     <li><a class="linkTop" href="{{ path('app_admin') }}">Page administrateur</a></li>
-                    <li><a class="linkTop" href="{{ path('app_register') }}">Inscription</a></li>
-                    <li><a class="linkTop" href="{{ path('app_login') }}">Connexion</a></li>
-                    <li><a class="linkTop" href="">Déconnexion</a></li>
+                    {% if app.user %}
+                        <li><a class="linkTop" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li><a class="linkTop" href="{{ path('app_register') }}">Inscription</a></li>
+                        <li><a class="linkTop" href="{{ path('app_login') }}">Connexion</a></li>
+                    {% endif %}
+                    
                 </ul>
             </div>
 
