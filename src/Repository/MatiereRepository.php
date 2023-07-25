@@ -38,6 +38,13 @@ class MatiereRepository extends ServiceEntityRepository
     ;
     }
 
+    // Requête SQL équivalente pour la requête DQL : 
+    // SELECT *
+    // FROM matiere m
+    // WHERE m.id NOT IN 
+    // (SELECT m.id FROM matiere m 
+    // INNER JOIN programme p ON p.matiere_id = m.id
+    // INNER JOIN session s ON s.id = p.session_id)
 
 //    /**
 //     * @return Matiere[] Returns an array of Matiere objects
