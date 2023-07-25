@@ -40,6 +40,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0;
 }
 
 #openBtn {
@@ -78,11 +79,32 @@ li {
     margin-bottom: 25px;
 }
 
+.home-user-choices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    background-color: rgb(61 61 61);
+    padding: 15px 20px 15px 20px;
+    margin-bottom: 25px;
+}
+
 .authentification-buttons {
     display: flex;
     flex-direction: row;
     gap: 35px;
     padding-bottom: 25px;
+}
+
+.home-user-links {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    padding-bottom: 25px;
+}
+
+a.home-user-paths {
+    font-size: 25px;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
