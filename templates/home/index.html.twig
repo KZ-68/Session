@@ -13,16 +13,26 @@
         sed blandit sapien volutpat tincidunt
     </p>
 
-    <div class="home-authentification">
-        <h2>Veuillez vous connecter pour accéder à vos Sessions</h2>
-        
-        <div class="authentification-buttons">
-            <button><a href="{{ path('app_register') }}">Inscription</a></button>
-            <button><a href="{{ path('app_login') }}">Connexion</a></button>
-        </div>
-        
 
-    </div>
+    {% if app.user %}
+        <div class="home-user-choices">
+            <h2>Parcourez la liste des formations et les sessions de votre choix</h2>
+            
+            <div class="home-user-links">
+                <a class="home-user-paths" href="{{ path('app_formation') }}">Liste des formations</a></li>
+                <a class="home-user-paths" href="{{ path('app_session') }}">Liste des sessions</a></li>
+            </div>
+        </div>
+    {% else %}
+        <div class="home-authentification">
+            <h2>Veuillez vous connecter pour accéder à vos Sessions</h2>
+            
+            <div class="authentification-buttons">
+                <button><a href="{{ path('app_register') }}">Inscription</a></button>
+                <button><a href="{{ path('app_login') }}">Connexion</a></button>
+            </div>
+        </div>
+    {% endif %}
 
 </div>
 {% endblock %}
