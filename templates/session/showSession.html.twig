@@ -22,7 +22,7 @@
 
     <h3>Matière programmés pour cette session :</h3>
     {% for session in session.programmes %}
-    <a href="{{ path('show_matiere', {'id': session.matiere.id}) }}">{{session.matiere}}</a> ({{session.duree}} jours)<br/>
+    <a href="{{ path('show_matiere', {'id': session.matiere.id}) }}">{{session.matiere}}</a> <span>({{session.duree}} jours)</span><br/>
     {% endfor %}
 
     <h3>Stagiaire non-inscrits à cette session :</h3>
@@ -31,12 +31,12 @@
     {% endfor %}
 
     <h3>Matieres non-programmés pour cette session :</h3>
-    {% for programme in programmes %}
-        <a href="">{{programme.matiere.denomination}}</a><br/>
+    {% for matiere in matieres %}
+        <a href="">{{matiere.denomination}}</a> <br/>
     {% endfor %}
 
 
     <a class="btn btn-success" href="{{ path('edit_stagiaires_session', {'id': session.id}) }}">Inscrire ou retirer des stagiaires à cette session</a>
-    <a class="btn btn-success" href="{{ path('edit_programmes_session', {'id': session.id}) }}">Programmer ou déprogrammer une matière à cette session</a>
+    <a class="btn btn-success" href="{{ path('edit_session', {'id': session.id}) }}">Programmer ou déprogrammer une matière à cette session</a>
 
 {% endblock %}
