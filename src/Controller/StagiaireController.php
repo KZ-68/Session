@@ -9,11 +9,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StagiaireController extends AbstractController
 {
     #[Route('/stagiaire', name: 'app_stagiaire')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(StagiaireRepository $stagiaireRepository): Response
     {
         $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
@@ -24,6 +26,7 @@ class StagiaireController extends AbstractController
 
     #[Route('/stagiaire/new', name: 'new_stagiaire')]
     #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new_edit(Stagiaire $stagiaire = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$stagiaire) {
@@ -54,7 +57,8 @@ class StagiaireController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/stagiaire/{id}/delete', name: 'delete_stagiaire')]
+    #[Route('/stagiaire/{id}/delete', name: 'delete_stagiaire')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Stagiaire $stagiaire, EntityManagerInterface $entityManager) {
         // Prépare la suppression d'une instance de l'objet 
         $entityManager->remove($stagiaire);
@@ -65,6 +69,7 @@ class StagiaireController extends AbstractController
     }
 
     #[Route('/stagiaire/{id}', name: 'show_stagiaire')]
+    #[IsGranted('ROLE_ADMIN')]
     public function show(Stagiaire $stagiaire): Response 
     {
         return $this->render('stagiaire/show.html.twig', [
