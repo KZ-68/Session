@@ -44,10 +44,11 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
-                    ])
-                    // new Regex([
-                    // 'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
-                    // 'match' => true])
+                    ]),
+                    new Regex([
+                    'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
+                    'match' => true,
+                    'message' => 'The password {{ value }} is not valid.'])
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
