@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+    <h1>Détails du profil</h1>
+
+    <figure>
+        <img class="user-avatar" src="{{asset('img/' ~ app.user.avatar)}}">
+    </figure>
+
+    <div class="profile-wrapper">
+        <div class="row">
+            <div class="col-12 col-md-4">Nom :</div>
+            <div class="col-6 col-md-5">{{app.user.nom}}</div>
+            <div class="col-12 col-md-4">Prénom :</div>
+            <div class="col-6 col-md-5">{{app.user.prenom}}</div>
+            <div class="col-12 col-md-4">Roles :</div>
+            <div  class="col-6 col-md-5">
+                {% if is_granted('ROLE_ADMIN') %} 
+                Administrateur
+                {% else %}
+                Utilisateur
+                {% endif %}
+            </div>
+            <div class="col-6 col-md-4">Adresse mail :</div>
+            <div class="col-6 col-md-5">{{app.user.email}}</div>
+        </div>
+    </div>
+
+
+{% endblock %}
