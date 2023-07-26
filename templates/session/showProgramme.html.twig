@@ -16,7 +16,7 @@
             <td>{{programme.matiere.categorie.titre}}</td>
         </tr>
         <tr>
-            <td>{{ programme.matiere.denomination }}</td>
+            <td><a href="{{ path('show_matiere', {'id': programme.matiere.id}) }}">{{ programme.matiere.denomination }}</a></td>
             <td>{{ programme.duree }} jours</td>
         </tr>
             {% endfor %}
