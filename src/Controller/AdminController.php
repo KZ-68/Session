@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Matiere;
 use App\Entity\Categorie;
 use App\Entity\Formation;
@@ -10,16 +11,16 @@ use App\Form\MatiereType;
 use App\Form\CategorieType;
 use App\Form\FormationType;
 use App\Form\ProgrammeType;
+use App\Repository\UserRepository;
 use App\Repository\MatiereRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ProgrammeRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
 {
@@ -228,5 +229,14 @@ class AdminController extends AbstractController
         return $this->render('admin/usersList.html.twig', [
             'users' => $users
         ]);
+    }
+    
+    #[Route('/admin/user/{id}/delete', name: 'delete_user')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deleteuser(User $user, UserRepository $userRepository) {
+        
+        $userRepository->removeUser($user->getId());
+
+        return $this->redirectToRoute('app_user');
     }
 }

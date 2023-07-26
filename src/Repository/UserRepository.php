@@ -39,6 +39,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    public function removeUser(int $user) {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+        $query = $sub->update('App\Entity\User', 'u')
+                    ->set('u.nom', 'NULL')
+                    ->set('u.prenom', 'NULL')
+                    ->set('u.password', 'NULL')
+                    ->set('u.email', 'NULL')
+                    ->set('u.avatar', 'NULL')
+                    ->where('u.id = :id')
+                    ->setParameter(':id', $user)
+                    ->getQuery();
+        $query->execute();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
