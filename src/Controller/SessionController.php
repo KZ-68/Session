@@ -14,10 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SessionController extends AbstractController
 {
     #[Route('/session', name: 'app_session')]
+    #[IsGranted('ROLE_USER')]
     public function index(SessionRepository $sessionRepository): Response
     {
         $sessions = $sessionRepository->findBy([], ["dateDebut" => "ASC"]);
@@ -35,6 +37,7 @@ class SessionController extends AbstractController
 
     #[Route('/session/new', name: 'new_session')]
     #[Route('/session/{id}/edit', name: 'edit_session')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new_edit_session(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$session) {
@@ -59,6 +62,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/delete', name: 'delete_session')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteSession(Session $session, EntityManagerInterface $entityManager) {
         // Prépare la suppression d'une instance de l'objet 
 
@@ -70,6 +74,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/show/editStagiaires', name: 'edit_stagiaires_session')]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit_stagiaires_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
 
@@ -91,6 +96,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/show/editProgrammes', name: 'edit_programmes_session')]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit_programmes_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
 
@@ -112,6 +118,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/showProgramme', name: 'show_programme')]
+    #[IsGranted('ROLE_USER')]
     public function showProgramme(Session $session): Response 
     {
         return $this->render('session/showProgramme.html.twig', [
@@ -120,6 +127,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/show', name: 'show_session')]
+    #[IsGranted('ROLE_USER')]
     public function showSession(Session $session, StagiaireRepository $stagiaireRepository, MatiereRepository $matiereRepository): Response 
     {
         $stagiaires = $stagiaireRepository->findNonRegisteredStagiairesInSession($session->getId());
