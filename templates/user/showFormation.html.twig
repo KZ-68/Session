@@ -18,8 +18,10 @@
                 <tr>
                     <td>
                         <p><a href="{{ path('show_session', {'id': session.id}) }}" aria-label="Session Details">{{ formation.intituleFormation }} {{ session.dateDebut | date('M-Y') }}</a><br/></p>
-                        <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
-                        <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
+                            <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

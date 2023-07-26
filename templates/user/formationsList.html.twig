@@ -5,12 +5,17 @@
 {% block body %}
     <h1>Liste des formations</h1>
 
-    <a href="{{ path('new_formation') }}" class="btn btn-success">Ajouter une formation</a><br/>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('new_formation') }}" class="btn btn-success">Ajouter une formation</a><br/>
+    {% endif %}
+    
     {% for formation in formations %}
         <p>
             <a href="{{ path('show_formation', {'id': formation.id}) }}" aria-label="Formation Details">{{ formation.intituleFormation }}</a>
-            <a class="btn btn-warning" href="{{ path('edit_formation', {'id': formation.id}) }}" aria-label="Edit">Edit</a>
-            <a class="btn btn-danger" href="{{ path('delete_formation', {'id': formation.id}) }}"aria-label="Suppr" >Suppr</a><br/>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-warning" href="{{ path('edit_formation', {'id': formation.id}) }}" aria-label="Edit">Edit</a>
+                <a class="btn btn-danger" href="{{ path('delete_formation', {'id': formation.id}) }}"aria-label="Suppr" >Suppr</a><br/>
+            {% endif %}
         </p>
         
     {% endfor %}

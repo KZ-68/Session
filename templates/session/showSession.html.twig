@@ -11,13 +11,22 @@
        Date de fin de Session : {{ session.dateFin | date("d/m/Y")}} <br/>
     </p>
 
-    <h3>Stagiaire inscrits à cette session :</h3>
-    {% if session.stagiaires | length > 0 %}
-        {% for session in session.stagiaires %}
-        <a href="">{{session.prenom}} {{session.nom}}</a><br/>
+    {% if is_granted('ROLE_ADMIN') %}
+        <h3>Stagiaire inscrits à cette session :</h3>
+        {% if session.stagiaires | length > 0 %}
+            {% for session in session.stagiaires %}
+            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{session.prenom}} {{session.nom}}</a><br/>
+            {% endfor %}
+        {% else %}
+            <p>Aucun stagiaire inscrit à cette session.</p>
+        {% endif %}  
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h3>Stagiaire non-inscrits à cette session :</h3>
+        {% for stagiaire in stagiaires %}
+            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{stagiaire.prenom}} {{stagiaire.nom}}</a><br/>
         {% endfor %}
-    {% else %}
-        <p>Aucun stagiaire inscrit à cette session.</p>
     {% endif %}
 
     <h3>Matière programmés pour cette session :</h3>
@@ -25,14 +34,9 @@
     <a href="{{ path('show_matiere', {'id': session.matiere.id}) }}">{{session.matiere}}</a> <span>({{session.duree}} jours)</span><br/>
     {% endfor %}
 
-    <h3>Stagiaire non-inscrits à cette session :</h3>
-    {% for stagiaire in stagiaires %}
-        <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{stagiaire.prenom}} {{stagiaire.nom}}</a><br/>
-    {% endfor %}
-
     <h3>Matieres non-programmés pour cette session :</h3>
     {% for matiere in matieres %}
-        <a href="">{{matiere.denomination}}</a> <br/>
+        <a href="{{ path('show_matiere', {'id': matiere.id}) }}">{{matiere.denomination}}</a> <br/>
     {% endfor %}
 
 

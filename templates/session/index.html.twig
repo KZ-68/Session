@@ -4,8 +4,11 @@
 
 {% block body %}
     <h1>Liste des sessions</h1>
-    <a href="{{ path('new_session') }}" class="btn btn-success">Ajouter une session</a><br/>
-
+    
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('new_session') }}" class="btn btn-success">Ajouter une session</a><br/>
+    {% endif %}
+    
     <div class="table-responsive-sm">
         <table class="table table-stripede">
             <thead>
@@ -21,8 +24,10 @@
             {% for session in sessions %}
             <tr>
                 <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }}</a>
-                    <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
-                    <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
+                        <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
+                    {% endif %}
                 </td>
                 <td>{{ session.dateDebut | date("d/m/Y") }}</td>
                 <td>{{ session.dateFin | date("d/m/Y") }}</td>
