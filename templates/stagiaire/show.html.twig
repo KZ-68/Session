@@ -24,7 +24,7 @@
     <h3>Session prévues</h3>
     {% if stagiaire.sessions | length > 0 %}
         {% for session in stagiaire.sessions %}
-        <tr><td><a href="">{{session.formation.intituleFormation }}</a> {{ session.dureeDate }}</td></tr> <br/>
+        <tr><td><a href="{{path('show_session', {'id': session.id})}}">{{session.formation.intituleFormation }}</a> {{ session.dureeDate }}</td></tr> <br/>
         {% endfor %}
     {% else %}
         <p>Aucune session de prévue pour le moment.</p>
