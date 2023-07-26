@@ -21,6 +21,7 @@
                 </ul>
                 {% if app.user%}
                     <ul class="list-right">
+                        <div class="li"><a class="linkTop" href="{{ path('app_profile')}}">Profil</a></div>
                         <li><a class="linkTop" href="{{ path('app_logout') }}">Déconnexion</a></li>
                     </ul>
                 {% else %}
