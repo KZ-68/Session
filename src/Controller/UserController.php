@@ -13,12 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
-    #[Route('/profile', name: 'app_user')]
+    #[Route('/profile', name: 'app_profile')]
     public function index(): Response
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        return $this->render('user/index.html.twig');
     }
 
      /* Attention : Si plusieurs view ont dans le nom de la route un identifiant et se trouve dans le même dossier
@@ -47,7 +45,7 @@ class UserController extends AbstractController
     {
         $formations = $formationRepository->findBy([], ["intituleFormation" => "ASC"]);
         
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/formationsList.html.twig', [
             'formations' => $formations
         ]);
     }
