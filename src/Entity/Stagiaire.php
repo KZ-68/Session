@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StagiaireRepository::class)]
 class Stagiaire
@@ -17,24 +18,54 @@ class Stagiaire
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(
+        message: 'Le nom {{ value }} ne peut pas être laissée vide'
+    )]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'Le nom {{ value }} contient des caractères non valide'
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(
+        message: 'Le prénom {{ value }} ne peut pas être laissée vide'
+    )]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'Le prénom {{ value }} contient des caractères non valide'
+    )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'Le genre {{ value }} contient des caractères non valide'
+    )]
     private ?string $genre = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+        message: 'La ville {{ value }} ne peut pas être laissée vide'
+    )]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'La ville {{ value }} contient des caractères non valide'
+    )]
     private ?string $ville = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+        message: 'L\'email {{ value }} ne peut pas être laissée vide'
+    )]
+    #[Assert\Email(
+        message: 'L\'email est invalide'
+    )]
     private ?string $email = null;
 
     #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'Le numéro de {{ value }} contient des caractères non valide'
+    )]
     private ?string $telephone = null;
 
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'stagiaires')]
