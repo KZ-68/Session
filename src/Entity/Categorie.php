@@ -6,6 +6,7 @@ use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
@@ -16,6 +17,12 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(
+        message: 'Le titre {{ value }} ne peut pas être laissée vide'
+    )]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'Le titre {{ value }} contient des caractères non valide'
+    )]
     private ?string $titre = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Matiere::class)]
