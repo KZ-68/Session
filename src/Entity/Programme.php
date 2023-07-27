@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProgrammeRepository::class)]
 class Programme
@@ -22,6 +23,9 @@ class Programme
     private ?Matiere $matiere = null;
 
     #[ORM\Column]
+    #[Assert\Positive(
+        message: 'Vous devez mettre une durée de minimum 1 jour'
+    )]
     private ?int $duree = null;
 
     public function __toString()
