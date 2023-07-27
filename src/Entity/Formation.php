@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
@@ -17,9 +18,25 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+        message: 'L\'intitulé {{ value }} ne peut pas être laissée vide'
+    )]
+    #[Assert\NoSuspiciousCharacters(
+        message:  'L\'intitulé {{ value }} contient des caractères non valide'
+    )]
     private ?string $intituleFormation = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(
+        message: 'La description ne peut pas être laissée vide'
+    )]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'La description contient des caractères non valide'
+    )]
+    #[Assert\Length(
+        max: 500,
+        maxMessage: 'La description ne peut pas dépasser 500 caractères !'
+    )]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Session::class, orphanRemoval: true)]
