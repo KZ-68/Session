@@ -20,15 +20,17 @@ class FileUploader
     public function upload(UploadedFile $file): string
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // Transforme les caractères unicode du nom du fichier en une version "safe" pour être ajouté dans l'URL
         $safeFilename = $this->slugger->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-
+        // Déplace le fichier dans le répertoire où sont stockés les images d'avatar
         try {
             $file->move($this->getTargetDirectory(), $fileName);
         } catch (FileException $e) {
-            // ... handle exception if something happens during file upload
+            // Gère les exceptions dans le cas où un problème arrive durant l'upload
         }
-
+        // Met à jour la propriété 'originaleFilename' pour stocker le nom du fichier image
+        // au lieu de son contenu
         return $fileName;
     }
 
