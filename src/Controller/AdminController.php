@@ -56,14 +56,20 @@ class AdminController extends AbstractController
         $form = $this->createForm(MatiereType::class, $matiere);
 
         $form->handleRequest($request);
+        // Si le formulaire est envoyé et validé
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupère les données du formulaire
             $matiere = $form->getData();
+            // Garde les données en mémoire pour préparer l'envoi en base de données
             $entityManager->persist($matiere);
+            // Relache les données et les envoient en base de données
             $entityManager->flush();
 
+            // Redirection vers la page... 
             return $this->redirectToRoute('app_matiere');
         }
 
+        // Affiche le rendu du formulaire et 
         return $this->render('admin/new_matiere.html.twig', [
             'formAddMatiere' => $form,
             'edit' => $matiere->getId()
