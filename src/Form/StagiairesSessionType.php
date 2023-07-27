@@ -17,11 +17,15 @@ class StagiairesSessionType extends AbstractType
         $builder
             ->add("stagiaires", EntityType::class, [
                 'class' => Stagiaire::class,
+                // Permet d'afficher les prenom et nom dans les choix
                 'choice_label' => function ($allChoices, $currentChoiceKey)
                 {
                     return $allChoices->getPrenom() . " " . $allChoices->getNom() . " " ;
                 },
+                // Si mis en true, des boutons radios ou des checkbox sont affichés
+                // En fonction de la valeur de 'multiple'
                 'expanded'  => true,
+                // Autorise plusieurs choix
                 'multiple'  => true,
             ])
             ->add('valider', SubmitType::class, [
