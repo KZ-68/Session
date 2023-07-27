@@ -35,12 +35,18 @@
     {% endfor %}
 
     <h3>Matieres non-programmés pour cette session :</h3>
-    {% for matiere in matieres %}
-        <a href="{{ path('show_matiere', {'id': matiere.id}) }}">{{matiere.denomination}}</a> <br/>
-    {% endfor %}
+    {% if matieres | length > 0 %}
+        {% for matiere in matieres %}
+            <a href="{{ path('show_matiere', {'id': matiere.id}) }}">{{matiere.denomination}}</a> <br/>
+        {% endfor %}
+    {% else %}
+        <p>Aucune matière programmée dans cette session.</p>
+    {% endif %}
+    
 
-
+    {% if is_granted('ROLE_FORMATEUR') %}
     <a class="btn btn-success" href="{{ path('edit_stagiaires_session', {'id': session.id}) }}">Inscrire ou retirer des stagiaires à cette session</a>
     <a class="btn btn-success" href="{{ path('edit_session', {'id': session.id}) }}">Programmer ou déprogrammer une matière à cette session</a>
-
+    {% endif %}
+    
 {% endblock %}
