@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Liste des sessions</h1>
     
-    {% if is_granted('ROLE_ADMIN') %}
+    {% if is_granted('ROLE_FORMATEUR') %}
         <a href="{{ path('new_session') }}" class="btn btn-success">Ajouter une session</a><br/>
     {% endif %}
     
@@ -24,7 +24,7 @@
             {% for session in sessions %}
             <tr>
                 <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }} {{ session.dateDebut | date('M-Y') }}</a>
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_FORMATEUR') %}
                         <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
                     {% endif %}
