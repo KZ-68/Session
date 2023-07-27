@@ -7,8 +7,13 @@
     <h1>Détails du profil</h1>
 
     <figure>
-        <img class="user-avatar" src="{{asset('uploads/' ~ app.user.avatar)}}">
+        <img class="user-avatar" src="{{asset('uploads/images/' ~ app.user.avatar)}}">
     </figure>
+    <p>Ajouter une image de profil :</p>
+    <p>{{ form_start(form) }}
+    {{ form_row(form.avatar) }}
+    {{ form_row(form.valider) }}
+    {{ form_end(form) }}</p>
 
     <div class="profile-wrapper">
         <div class="row">
