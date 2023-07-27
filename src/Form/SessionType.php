@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class SessionType extends AbstractType
@@ -33,6 +34,12 @@ class SessionType extends AbstractType
             ])
             ->add('nbMax', IntegerType::class, [
                 'empty_data' => '0',
+                // Pour mettre des contraintes directement dans le formulaire, voici un exemple 
+                'constraints' => [
+                    new PositiveOrZero ([
+                        'message' => 'Cette valeur doit être positive ou zéro.'
+                    ]),
+                ]
             ])
             ->add('formation', EntityType::class, [
                 'class' => Formation::class,
