@@ -15,7 +15,7 @@
         <h3>Stagiaire inscrits à cette session :</h3>
         {% if session.stagiaires | length > 0 %}
             {% for session in session.stagiaires %}
-            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{session.prenom}} {{session.nom}}</a><br/>
+            <a href="{{ path('show_stagiaire', {'id': session.id}) }}">{{session.prenom}} {{session.nom}}</a><br/>
             {% endfor %}
         {% else %}
             <p>Aucun stagiaire inscrit à cette session.</p>
