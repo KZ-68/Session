@@ -6,6 +6,7 @@ use App\Repository\MatiereRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MatiereRepository::class)]
 class Matiere
@@ -16,6 +17,12 @@ class Matiere
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(
+        message: 'Le nom de la matière {{ value }} ne peut pas être laissée vide'
+    )]
+    #[Assert\NoSuspiciousCharacters(
+        message: 'Le nom de la matière {{ value }} contient des caractères non valide'
+    )]
     private ?string $denomination = null;
 
     #[ORM\ManyToOne(inversedBy: 'matieres')]
