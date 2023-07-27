@@ -23,7 +23,7 @@
             <tbody>
             {% for session in sessions %}
             <tr>
-                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }}</a>
+                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }} {{ session.dateDebut | date('M-Y') }}</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
@@ -61,7 +61,7 @@
             <tbody>
             {% for currentSession in currentSessions %}
             <tr>
-                <td><a href="{{ path('show_session', {'id': currentSession.id})}}">{{ currentSession.formation.intituleFormation }}</a></td>
+                <td><a href="{{ path('show_session', {'id': currentSession.id})}}">{{ currentSession.formation.intituleFormation }} {{ currentSession.dateDebut | date('M-Y')}}</a></td>
                 <td>{{ currentSession.dateDebut | date("d/m/Y") }}</td>
                 <td>{{ currentSession.dateFin | date("d/m/Y") }}</td>
                 <td>{{ currentSession.nbMax }}</td>
@@ -95,7 +95,7 @@
                 
             {% for nextSession in nextSessions %}
             <tr>
-                <td><a href="{{ path('show_session', {'id': nextSession.id})}}">{{ nextSession.formation.intituleFormation }}</a></td>
+                <td><a href="{{ path('show_session', {'id': nextSession.id})}}">{{ nextSession.formation.intituleFormation }} {{ nextSession.dateDebut | date('Y-M') }}</a></td>
                 <td>{{ nextSession.dateDebut | date("d/m/Y") }}</td>
                 <td>{{ nextSession.dateFin | date("d/m/Y") }}</td>
                 <td>{{ nextSession.nbMax }}</td>
@@ -129,7 +129,7 @@
                 
             {% for oldSession in oldSessions %}
             <tr>
-                <td><a href="{{ path('show_session', {'id': oldSession.id})}}">{{ oldSession.formation.intituleFormation }}</a></td>
+                <td><a href="{{ path('show_session', {'id': oldSession.id})}}">{{ oldSession.formation.intituleFormation }} {{ oldSession.dateDebut | date('M-Y') }}</a></td>
                 <td>{{ oldSession.dateDebut | date("d/m/Y") }}</td>
                 <td>{{ oldSession.dateFin | date("d/m/Y") }}</td>
                 <td>{{ oldSession.nbMax }}</td>
