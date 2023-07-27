@@ -7,8 +7,8 @@
 
     {% for user in users %}
     <p>
-        <img class="user-avatar" src="{{asset('uploads/' ~ user.avatar)}}"> <a href="" >{{user.prenom}} {{user.nom}}</a>
-        <a class="btn btn-warning" href="{{ path('edit_user', {'id': user.id}) }}" aria-label="Edit">Edit</a>
+        <img class="user-avatar" src="{{asset('uploads/images/' ~ user.avatar)}}"> <a href="" >{{user.prenom}} {{user.nom}}</a>
+        
         <a class="btn btn-danger" href="{{ path('delete_user', {'id': user.id}) }}" aria-label="Suppr">Suppr</a><br/>
     </p>
     {% endfor %}
