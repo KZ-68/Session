@@ -37,7 +37,7 @@ class SessionController extends AbstractController
 
     #[Route('/session/new', name: 'new_session')]
     #[Route('/session/{id}/edit', name: 'edit_session')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_FORMATEUR')]
     public function new_edit_session(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$session) {
@@ -62,7 +62,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/delete', name: 'delete_session')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_FORMATEUR')]
     public function deleteSession(Session $session, EntityManagerInterface $entityManager) {
         // Prépare la suppression d'une instance de l'objet 
 
@@ -74,7 +74,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/show/editStagiaires', name: 'edit_stagiaires_session')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_FORMATEUR')]
     public function edit_stagiaires_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
 
@@ -96,7 +96,7 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/show/editProgrammes', name: 'edit_programmes_session')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_FORMATEUR')]
     public function edit_programmes_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
 
