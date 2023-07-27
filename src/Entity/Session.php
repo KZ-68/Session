@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -18,10 +19,21 @@ class Session
     #[ORM\Column]
     private ?int $id = null;
 
+    // Assert permet d'ajouter des contraintes fixes sur les attributs de l'entité
+    // Elle sera appelée lors de l'ajout ou d'une modification dans un formulaire
+    // Si vous avez besoin d'un formulaire spécifique, ajoutez des contraintes personnalisées dans le FormType
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThanOrEqual(
+        value : 'today',
+        message: 'Vous devez choisir une date commençant aujourdhui ou supérieur à la date du jour'
+    )]
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThan(
+        value: 'today',
+        message: 'Vous devez choisir une date supérieur à la date du jour'
+    )]
     private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\Column]
