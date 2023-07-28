@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{message.entete}}{% endblock %}
+
+{% block body %}
+    <h1>{{message.entete}}</h1>
+    
+    <p>
+        Objet : {{ message.entete }}<br/>
+        Date : {{ message.createdAt | date("m/d/Y")}}
+    </p>
+    <p>{{message.contenu}}</p>
+
+    
+{% endblock %}
