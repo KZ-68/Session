@@ -42,7 +42,7 @@ class StagiaireType extends AbstractType
                     'class' => 'form-control' 
                 ]
             ])
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'type' => 'email'
