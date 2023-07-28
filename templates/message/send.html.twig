@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %} {# Héritage de la view de base #}
+
+{% block title %}Envoyer un message{% endblock %}
+
+{% block body %}
+
+    <h1>Envoyer un message</h1>
+
+    {{ form_start(formSend) }}
+        {{ form_row(formSend.entete) }}
+        {{ form_row(formSend.recipient)}}
+        {{ form_row(formSend.contenu)}}
+        {{ form_row(formSend.envoyer) }}
+    {{ form_end(formSend) }}
+
+{% endblock %}
