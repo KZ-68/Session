@@ -21,7 +21,7 @@ class Matiere
         message: 'Le nom de la matière {{ value }} ne peut pas être laissée vide'
     )]
     #[Assert\NoSuspiciousCharacters(
-        message: 'Le nom de la matière {{ value }} contient des caractères non valide'
+        restrictionLevelMessage: 'Le nom de la matière {{ value }} contient des caractères non valide'
     )]
     private ?string $denomination = null;
 

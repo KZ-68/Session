@@ -22,7 +22,7 @@ class Stagiaire
         message: 'Le nom {{ value }} ne peut pas être laissée vide'
     )]
     #[Assert\NoSuspiciousCharacters(
-        message: 'Le nom {{ value }} contient des caractères non valide'
+        restrictionLevelMessage: 'Le nom {{ value }} contient des caractères non valide'
     )]
     private ?string $nom = null;
 
@@ -31,13 +31,13 @@ class Stagiaire
         message: 'Le prénom {{ value }} ne peut pas être laissée vide'
     )]
     #[Assert\NoSuspiciousCharacters(
-        message: 'Le prénom {{ value }} contient des caractères non valide'
+        restrictionLevelMessage: 'Le prénom {{ value }} contient des caractères non valide'
     )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 10)]
     #[Assert\NoSuspiciousCharacters(
-        message: 'Le genre {{ value }} contient des caractères non valide'
+        restrictionLevelMessage: 'Le genre {{ value }} contient des caractères non valide'
     )]
     private ?string $genre = null;
 
@@ -49,7 +49,7 @@ class Stagiaire
         message: 'La ville {{ value }} ne peut pas être laissée vide'
     )]
     #[Assert\NoSuspiciousCharacters(
-        message: 'La ville {{ value }} contient des caractères non valide'
+        restrictionLevelMessage: 'La ville {{ value }} contient des caractères non valide'
     )]
     private ?string $ville = null;
 
@@ -64,7 +64,7 @@ class Stagiaire
 
     #[ORM\Column(length: 50, nullable: true)]
     #[Assert\NoSuspiciousCharacters(
-        message: 'Le numéro de {{ value }} contient des caractères non valide'
+        restrictionLevelMessage: 'Le numéro de {{ value }} contient des caractères non valide'
     )]
     private ?string $telephone = null;
 
