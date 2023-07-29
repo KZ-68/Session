@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ImageController!{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+        {{ form_row(form.filename)}}
+        {{ form_row(form.valider)}}
+{{ form_end(form) }}
+
+{% endblock %}
