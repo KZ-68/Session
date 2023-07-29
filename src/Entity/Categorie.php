@@ -21,7 +21,7 @@ class Categorie
         message: 'Le titre {{ value }} ne peut pas être laissée vide'
     )]
     #[Assert\NoSuspiciousCharacters(
-        message: 'Le titre {{ value }} contient des caractères non valide'
+        restrictionLevelMessage: 'Le titre {{ value }} contient des caractères non valide'
     )]
     private ?string $titre = null;
 
