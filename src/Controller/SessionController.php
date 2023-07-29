@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Form\SessionType;
-use App\Form\ProgrammesSessionType;
 use App\Form\StagiairesSessionType;
 use App\Repository\MatiereRepository;
 use App\Repository\SessionRepository;
@@ -100,7 +99,7 @@ class SessionController extends AbstractController
     public function edit_programmes_session(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        $form = $this->createForm(ProgrammesSessionType::class, $session);
+        $form = $this->createForm(SessionType::class, $session);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
