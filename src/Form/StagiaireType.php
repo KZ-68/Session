@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class StagiaireType extends AbstractType
@@ -49,13 +50,14 @@ class StagiaireType extends AbstractType
                 ]
             ])
             ->add('telephone', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control' 
                 ]
             ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-success' 
+                    'class' => 'btn btn-success',
                 ]
             ])
         ;
