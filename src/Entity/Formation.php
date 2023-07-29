@@ -22,7 +22,7 @@ class Formation
         message: 'L\'intitulé {{ value }} ne peut pas être laissée vide'
     )]
     #[Assert\NoSuspiciousCharacters(
-        message:  'L\'intitulé {{ value }} contient des caractères non valide'
+        restrictionLevelMessage:  'L\'intitulé {{ value }} contient des caractères non valide'
     )]
     private ?string $intituleFormation = null;
 
@@ -31,7 +31,7 @@ class Formation
         message: 'La description ne peut pas être laissée vide'
     )]
     #[Assert\NoSuspiciousCharacters(
-        message: 'La description contient des caractères non valide'
+        restrictionLevelMessage: 'La description contient des caractères non valide'
     )]
     #[Assert\Length(
         max: 500,
@@ -42,9 +42,13 @@ class Formation
     #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Session::class, orphanRemoval: true)]
     private Collection $sessions;
 
+    #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Image::class, cascade: ['persist'], orphanRemoval: true)]
+    private Collection $images;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +104,36 @@ class Formation
             // set the owning side to null (unless already changed)
             if ($session->getFormation() === $this) {
                 $session->setFormation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getFormation() === $this) {
+                $image->setFormation(null);
             }
         }
 
