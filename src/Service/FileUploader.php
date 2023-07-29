@@ -8,6 +8,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FileUploader
 {
+    // targetDirectory correspond au chemin d'envoi des fichiers présent dans services.yaml
     private $targetDirectory;
     private $slugger;
 
