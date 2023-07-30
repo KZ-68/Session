@@ -23,7 +23,11 @@
             <tbody>
             {% for session in sessions %}
             <tr>
+                {% if session.formation | length > 0 %}
                 <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.formation.intituleFormation }} {{ session.dateDebut | date('M-Y') }}</a>
+                {% else %}
+                <td><p>Aucune Session Programmée</p></td>
+                {% endif %}
                     {% if is_granted('ROLE_FORMATEUR') %}
                         <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Supp</a><br/>
@@ -61,6 +65,7 @@
             <tbody>
             {% for currentSession in currentSessions %}
             <tr>
+                {% if currentSession.formation | length > 0 %}
                 <td><a href="{{ path('show_session', {'id': currentSession.id})}}">{{ currentSession.formation.intituleFormation }} {{ currentSession.dateDebut | date('M-Y')}}</a></td>
                 <td>{{ currentSession.dateDebut | date("d/m/Y") }}</td>
                 <td>{{ currentSession.dateFin | date("d/m/Y") }}</td>
@@ -72,6 +77,10 @@
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                     </svg></a>
                 </td>
+                {% else %}
+                <td><p>Aucune Session en cours</p></td>
+                {% endif %}
+                
             </tr>
             {% endfor %}
             </tbody>
@@ -95,6 +104,7 @@
                 
             {% for nextSession in nextSessions %}
             <tr>
+                {% if nextSession.formation | length > 0 %}
                 <td><a href="{{ path('show_session', {'id': nextSession.id})}}">{{ nextSession.formation.intituleFormation }} {{ nextSession.dateDebut | date('Y-M') }}</a></td>
                 <td>{{ nextSession.dateDebut | date("d/m/Y") }}</td>
                 <td>{{ nextSession.dateFin | date("d/m/Y") }}</td>
@@ -106,6 +116,11 @@
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                     </svg></a>
                 </td>
+                {% else %}
+                <td><p>Aucune Prochaine Session Programmée</p></td>
+                {% endif %}
+                
+                
             </tr>
             {% endfor %}
             </tbody>
@@ -129,6 +144,7 @@
                 
             {% for oldSession in oldSessions %}
             <tr>
+                {% if oldSession.formation | length > 0 %}
                 <td><a href="{{ path('show_session', {'id': oldSession.id})}}">{{ oldSession.formation.intituleFormation }} {{ oldSession.dateDebut | date('M-Y') }}</a></td>
                 <td>{{ oldSession.dateDebut | date("d/m/Y") }}</td>
                 <td>{{ oldSession.dateFin | date("d/m/Y") }}</td>
@@ -140,6 +156,10 @@
                     <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                     </svg></a>
                 </td>
+                {% else %}
+                <td><p>Aucune Ancienne Session Trouvable</p></td>
+                {% endif %}
+                
             </tr>
             {% endfor %}
             </tbody>
