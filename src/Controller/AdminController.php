@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Image;
 use App\Entity\Matiere;
 use App\Entity\Categorie;
 use App\Entity\Formation;
@@ -11,6 +12,7 @@ use App\Form\MatiereType;
 use App\Form\CategorieType;
 use App\Form\FormationType;
 use App\Form\ProgrammeType;
+use App\Service\FileUploader;
 use App\Repository\UserRepository;
 use App\Repository\MatiereRepository;
 use App\Repository\CategorieRepository;
@@ -194,7 +196,7 @@ class AdminController extends AbstractController
     #[Route('/admin/formation/new', name: 'new_formation')]
     #[Route('/admin/formation/{id}/edit', name: 'edit_formation')]
     #[IsGranted('ROLE_ADMIN')]
-    public function new_edit_formation(Formation $formation = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function new_edit_formation(Formation $formation = null, Request $request, FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
     {
         if (!$formation) {
             $formation = new Formation();
@@ -204,7 +206,17 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $formation = $form->getData();
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $image) {
+                $newFileName = $fileUploader->upload($image);
+                $img = new Image;
+                $img->setName($newFileName);
+                $formation->addImage($img);
+            }
+
             $entityManager->persist($formation);
             $entityManager->flush();
 
@@ -212,7 +224,7 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/new_formation.html.twig', [
-            'formAddFormation' => $form,
+            'form' => $form,
             'edit' => $formation->getId()
         ]);
     }
