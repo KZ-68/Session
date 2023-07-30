@@ -9,10 +9,11 @@
     <h1>Ajouter une formation</h1>
     {% endif %}
 
-    {{ form_start(formAddFormation) }}
-        {{ form_row(formAddFormation.intituleFormation) }}
-        {{ form_row(formAddFormation.description) }}
-        {{ form_row(formAddFormation.valider) }}
-    {{ form_end(formAddFormation) }}
+    {{ form_start(form) }}
+        {{ form_row(form.intituleFormation) }}
+        {{ form_row(form.description) }}
+        {{form_row(form.images)}}
+        {{ form_row(form.valider) }}
+    {{ form_end(form) }}
 
 {% endblock %}
