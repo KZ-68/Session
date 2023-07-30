@@ -17,8 +17,8 @@ class Image
     #[ORM\JoinColumn(nullable: false)]
     private ?Formation $formation = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $filename = null;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
     public function getId(): ?int
     {
@@ -37,14 +37,14 @@ class Image
         return $this;
     }
 
-    public function getFileName(): ?string
+    public function getName(): ?string
     {
-        return $this->filename;
+        return $this->name;
     }
 
-    public function setFileName(string $filename): static
+    public function setName(string $name): static
     {
-        $this->filename = $filename;
+        $this->name = $name;
 
         return $this;
     }
