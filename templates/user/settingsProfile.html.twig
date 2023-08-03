@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramètres du Profil{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Paramètres du Profil</h1>
+
+    <p>Modifier l'adresse mail :</p>
+    <p>{{ form_start(form) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.valider) }}
+    {{ form_end(form) }}</p>
+    </div>
+
+{% endblock %}
