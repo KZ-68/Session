@@ -8,6 +8,7 @@ use App\Entity\Matiere;
 use App\Entity\Categorie;
 use App\Entity\Formation;
 use App\Service\FileUploader;
+use App\Form\UserSettingsType;
 use App\Repository\UserRepository;
 use App\Repository\FormationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -89,6 +90,30 @@ class UserController extends AbstractController
     {
         return $this->render('user/showFormation.html.twig', [
             'formation' => $formation
+        ]);
+    }
+
+    #[Route('/profile/settings', name: 'settings_profile')]
+    #[IsGranted('ROLE_USER')]
+    public function changeEmail(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    {
+
+        $user = $this->getUser();
+        $form = $this->createForm(UserSettingsType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $email = $form->get('email')->getData();
+            
+            $userRepository->updateUser($user, $email);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('settings_profile');
+        }
+
+        return $this->render('user/settingsProfile.html.twig', [
+            'form' => $form
         ]);
     }
 }
