@@ -4,7 +4,11 @@
 
 {% block body %}
 
+<a href="{{ path('settings_profile') }}">Paramètres</a>
+
     <h1>Détails du profil</h1>
+
+    <a href="{{ path('app_message')}}">Messagerie</a>
 
     <figure>
         <img class="user-avatar" src="{{asset('uploads/images/' ~ app.user.avatar)}}">
