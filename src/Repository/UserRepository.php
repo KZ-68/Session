@@ -3,11 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Parameter;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -50,6 +52,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                     ->set('u.avatar', 'NULL')
                     ->where('u.id = :id')
                     ->setParameter(':id', $user)
+                    ->getQuery();
+        $query->execute();
+    }
+
+    public function updateUser(User $user, string $email) {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+        $query = $sub->update('App\Entity\User', 'u')
+                    ->set('u.email', ':email')
+                    ->where('u.id = :id')
+                    ->setParameters(new ArrayCollection([
+                        new Parameter(':id', $user),
+                        new Parameter(':email', $email)
+                    ]))
                     ->getQuery();
         $query->execute();
     }
