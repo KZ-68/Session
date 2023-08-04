@@ -63,6 +63,11 @@
                 <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="close"></button>
             </div>
         {% endfor %}
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success " role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
 
         {% block body %}{% endblock %}
         <footer>
