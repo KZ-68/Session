@@ -9,12 +9,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class UserSettingsType extends AbstractType
+class UserEmailType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class)
+            ->add('confirmEmail', EmailType::class, [
+                'required' => false,
+                'mapped' => false
+            ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success' 
